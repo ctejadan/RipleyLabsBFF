@@ -9,7 +9,7 @@ const client = redis.createClient({
 const timeToLive = 60
 router.get('/:city', async ctx => {
   const { city } = ctx.params
-  const storedInRedis = await client.get(city).then(result => result).catch(e => console.log(e)
+  const storedInRedis = await client.get(city).then(result => result).catch(e => console.log(e))
 
   console.log(storedInRedis)
 

@@ -21,7 +21,7 @@ const getWeather = async (lat, lng) => {
   }
   catch (e) {
     throw new Error(e => {
-      console.log(e)
+      console.log(e.message)
     })
   }
 }

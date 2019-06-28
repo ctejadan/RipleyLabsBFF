@@ -1,7 +1,5 @@
-//https://api.darksky.net/forecast/c4fc0099e0db4df6a2d9a870b6ab3a8e/37.8267,-122.4233
 const axios = require('axios')
 const apiKey = 'c4fc0099e0db4df6a2d9a870b6ab3a8e'
-const baseURL = 'https://api.darksky.net/'
 
 const instance = axios.create({
   baseURL: 'https://api.darksky.net',

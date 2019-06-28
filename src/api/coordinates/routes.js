@@ -9,7 +9,7 @@ const client = redis.createClient({
 const timeToLive = 60
 router.get('/:city', async ctx => {
   const { city } = ctx.params
-  const storedInRedis = client.getAsync(city)
+  const storedInRedis = await client.get(city)
 
   if (storedInRedis) {
     console.log("saved in redis :D")
@@ -18,7 +18,7 @@ router.get('/:city', async ctx => {
   } else {
     const body = await controller.byCity(city)
 
-    client.setexAsync(city, timeToLive, JSON.stringify(body))
+    await client.set(city, timeToLive, JSON.stringify(body))
 
     ctx.body = body
   }

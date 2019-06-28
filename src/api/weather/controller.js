@@ -1,28 +1,17 @@
-const axios = require('axios')
-const apiKey = 'c4fc0099e0db4df6a2d9a870b6ab3a8e'
+const DarkSkyClient = require('./DarkSkyClient')
 
-const instance = axios.create({
-  baseURL: 'https://api.darksky.net',
-  timeout: 10000,
-});
-
-const getWeather = async (lat, lng) => {
+const getWeather = async(lat, lng) => {
   try {
-    const weatherByLatLng = await instance.request({
-      url: '/forecast/' + apiKey + '/' + [lat, lng].join(",") + '?units=si&lang=es', method: 'get'
-    })
+    const darkSkyClient = new DarkSkyClient()
+    const weatherByLatLng = await darkSkyClient.getWeatherByCoordinates(lat, lng)
 
     return {
-      temperature: weatherByLatLng.data.currently.temperature,
-      icon: weatherByLatLng.data.currently.icon,
-      summary: weatherByLatLng.data.currently.summary,
+      temperature: weatherByLatLng.currently.temperature,
+      icon: weatherByLatLng.currently.icon,
+      summary: weatherByLatLng.currently.summary
     }
-
-  }
-  catch (e) {
-    throw new Error(e => {
-      console.log(e.message)
-    })
+  } catch (e) {
+    throw new Error(e.message)
   }
 }
 

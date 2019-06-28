@@ -1,0 +1,12 @@
+{
+  "extends": "koa",
+  "rules": {
+    "semi": [1, "never"],
+    "no-useless-escape": ["warn"],
+    "handle-callback-err": ["warn"]
+  },
+  "env": {
+    "jest": true
+  }
+}
+

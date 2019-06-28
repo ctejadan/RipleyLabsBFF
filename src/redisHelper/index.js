@@ -1,4 +1,4 @@
-const redis = require("redis")
+const redis = require('redis')
 const client = redis.createClient({
   host: 'ec2-52-206-114-45.compute-1.amazonaws.com',
   port: 10669,
@@ -6,15 +6,15 @@ const client = redis.createClient({
 })
 const timeToLive = 60
 
-checkIfDataInRedis = (city) => {
+const checkIfDataInRedis = city => {
   return new Promise((resolve, reject) => {
-    client.get(city, function (err, reply) {
+    client.get(city, (err, reply) => {
       resolve(reply)
     })
   })
 }
 
-saveDataToRedis = (city, body) => {
+const saveDataToRedis = (city, body) => {
   client.set(city, JSON.stringify(body), 'EX', timeToLive)
 }
 

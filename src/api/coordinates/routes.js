@@ -18,9 +18,10 @@ router.get('/:city', async ctx => {
     ctx.body = { data: "stored in redis" + storedInRedis }
 
   } else {
+    console.log("not found in redis")
     const body = await controller.byCity(city)
 
-    await client.set(city, timeToLive, JSON.stringify(body))
+    await client.set(city, JSON.stringify(body), 'EX', timeToLive)
 
     ctx.body = body
   }

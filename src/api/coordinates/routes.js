@@ -9,11 +9,13 @@ const client = redis.createClient({
 const timeToLive = 60
 router.get('/:city', async ctx => {
   const { city } = ctx.params
-  const storedInRedis = await client.get(city)
+  const storedInRedis = await client.get(city).then(result => result).catch(e => console.log(e)
+
+  console.log(storedInRedis)
 
   if (storedInRedis) {
     console.log("saved in redis :D ", storedInRedis)
-    ctx.body = "stored in redis" + storedInRedis
+    ctx.body = { data: "stored in redis" + storedInRedis }
 
   } else {
     const body = await controller.byCity(city)

@@ -11,18 +11,15 @@ router.get('/:city', async ctx => {
   const { city } = ctx.params
 
   const storedInRedis = await client.get(city, function (err, reply) {
-    console.log(reply);
-    return reply
+    console.log(reply)
+    return JSON.parse(reply)
   })
-
-  console.log(storedInRedis)
 
   if (storedInRedis) {
     console.log("saved in redis :D ", storedInRedis)
-    ctx.body = { data: "stored in redis" + storedInRedis }
+    ctx.body = storedInRedis
 
   } else {
-    console.log("not found in redis")
     const body = await controller.byCity(city)
 
     await client.set(city, JSON.stringify(body), 'EX', timeToLive)

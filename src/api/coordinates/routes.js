@@ -12,8 +12,8 @@ router.get('/:city', async ctx => {
   const storedInRedis = await client.get(city)
 
   if (storedInRedis) {
-    console.log("saved in redis :D")
-    return "stored in redis" + storedInRedis
+    console.log("saved in redis :D ", storedInRedis)
+    ctx.body = "stored in redis" + storedInRedis
 
   } else {
     const body = await controller.byCity(city)

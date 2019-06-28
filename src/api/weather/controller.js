@@ -11,7 +11,7 @@ const getWeather = async(lat, lng) => {
       summary: weatherByLatLng.currently.summary
     }
   } catch (e) {
-    throw new Error(e.message)
+    throw new Error('Bad data')
   }
 }
 
